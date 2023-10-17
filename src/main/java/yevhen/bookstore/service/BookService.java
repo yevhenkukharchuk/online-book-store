@@ -1,10 +1,13 @@
 package yevhen.bookstore.service;
 
 import java.util.List;
-import yevhen.bookstore.model.Book;
+import yevhen.bookstore.dto.BookDto;
+import yevhen.bookstore.dto.CreateBookRequestDto;
 
 public interface BookService {
-    Book save(Book book);
+    BookDto save(CreateBookRequestDto requestDto);
 
-    List findAll();
+    List<BookDto> findAll();
+
+    BookDto getBookById(Long id);
 }

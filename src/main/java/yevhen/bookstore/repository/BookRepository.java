@@ -1,12 +1,10 @@
 package yevhen.bookstore.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import yevhen.bookstore.model.Book;
 
-public interface BookRepository {
-    Book save(Book book);
-
-    List<Book> findAll();
+public interface BookRepository extends JpaRepository<Book, Long> {
 
     Book getBookById(Long id);
+
 }

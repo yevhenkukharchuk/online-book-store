@@ -29,6 +29,7 @@ public class OnlineBookStoreApplication {
             book.setDescription("Good book");
             book.setCoverImage("Image1.jpg");
             bookService.save(book);
+            bookService.findAll().forEach(System.out::println);
         };
     }
 }

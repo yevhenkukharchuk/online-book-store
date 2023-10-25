@@ -6,5 +6,5 @@ import yevhen.bookstore.model.Book;
 public interface BookRepository {
     Book save(Book book);
 
-    List findAll();
+    List<Book> findAll();
 }

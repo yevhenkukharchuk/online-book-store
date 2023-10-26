@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "books")
+@Table (name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,6 @@ public class Book {
 
     @Column(nullable = false)
     private BigDecimal price;
-
     private String description;
     private String coverImage;
 }

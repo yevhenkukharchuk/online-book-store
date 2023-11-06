@@ -1,6 +1,8 @@
 package yevhen.bookstore.repository;
 
 import java.util.List;
+import java.util.Optional;
+
 import yevhen.bookstore.model.Book;
 
 public interface BookRepository {
@@ -8,5 +10,5 @@ public interface BookRepository {
 
     List<Book> findAll();
 
-    Book findById(Long id);
+    Optional<Book> findById(Long id);
 }

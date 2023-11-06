@@ -2,9 +2,12 @@ package yevhen.bookstore.repository.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import yevhen.bookstore.exception.DataProcessingException;
 import yevhen.bookstore.model.Book;
@@ -28,7 +31,7 @@ public class BookRepositoryImpl implements BookRepository {
             session.persist(book);
             transaction.commit();
             return book;
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -50,11 +53,11 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public Book findById(Long id) {
+    public Optional<Book> findById(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.get(Book.class, id);
+            return Optional.ofNullable(session.find(Book.class, id));
         } catch (Exception e) {
-            throw new EntityNotFoundException("Can't get book by id:" + id, e);
+            throw new EntityNotFoundException("Can't find book by id:" + id, e);
         }
     }
 }

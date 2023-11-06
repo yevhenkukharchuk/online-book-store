@@ -9,5 +9,5 @@ public record CreateBookRequestDto(
         String isbn,
         BigDecimal price,
         String description,
-        String coverImage
-) {}
+        String coverImage) {
+}

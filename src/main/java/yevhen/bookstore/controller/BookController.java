@@ -18,7 +18,7 @@ import yevhen.bookstore.service.BookService;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/api/books")
+@RequestMapping("/books")
 public class BookController {
 
     private final BookService bookService;
@@ -28,7 +28,7 @@ public class BookController {
         return bookService.findAll();
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public BookDto getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }

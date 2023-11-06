@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yevhen.bookstore.dto.BookDto;
 import yevhen.bookstore.dto.CreateBookRequestDto;
+import yevhen.bookstore.exception.EntityNotFoundException;
 import yevhen.bookstore.mapper.BookMapper;
 import yevhen.bookstore.model.Book;
 import yevhen.bookstore.repository.BookRepository;
@@ -33,8 +34,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto getBookById(Long id) {
-        Book book = bookRepository.getBookById(id);
-        return bookMapper.toDto(book);
+        return bookRepository.findById(id)
+                .map(bookMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("Can't get book by id:" + id));
     }
 
     @Override

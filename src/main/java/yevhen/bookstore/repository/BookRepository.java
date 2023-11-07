@@ -7,6 +7,5 @@ import yevhen.bookstore.model.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-
     Optional<Book> findById(Long id);
 }

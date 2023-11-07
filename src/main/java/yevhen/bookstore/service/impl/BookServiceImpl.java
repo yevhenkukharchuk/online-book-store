@@ -14,7 +14,6 @@ import yevhen.bookstore.service.BookService;
 @RequiredArgsConstructor
 @Service
 public class BookServiceImpl implements BookService {
-
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
 
@@ -49,6 +48,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteBookById(Long id) {
+        bookRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Can't find book by id:" + id));
         bookRepository.deleteById(id);
     }
 }

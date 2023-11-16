@@ -7,13 +7,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = FieldMatcher.class)
-@Target(ElementType.TYPE)
+@Constraint(validatedBy = EmailValidator.class)
+@Target({ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FieldMatch {
-    String field();
-    String fieldMatch();
-    String message() default "Password and repeat password aren't equal";
+public @interface Email {
+    String message() default "Invalid format of email";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

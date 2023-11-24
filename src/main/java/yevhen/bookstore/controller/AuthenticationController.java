@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import yevhen.bookstore.dto.UserLoginRequestDto;
-import yevhen.bookstore.dto.UserLoginResponseDto;
-import yevhen.bookstore.dto.UserRegistrationRequestDto;
-import yevhen.bookstore.dto.UserResponseDto;
+import yevhen.bookstore.dto.user.UserLoginRequestDto;
+import yevhen.bookstore.dto.user.UserLoginResponseDto;
+import yevhen.bookstore.dto.user.UserRegistrationRequestDto;
+import yevhen.bookstore.dto.user.UserResponseDto;
 import yevhen.bookstore.exception.RegistrationException;
 import yevhen.bookstore.security.AuthenticationService;
-import yevhen.bookstore.service.UserService;
+import yevhen.bookstore.service.user.UserService;
 
 @Tag(name = "Authentication", description = "Endpoints for registration and authentication")
 @RestController

@@ -1,19 +1,19 @@
-package yevhen.bookstore.service.impl;
+package yevhen.bookstore.service.book;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import yevhen.bookstore.dto.BookDto;
-import yevhen.bookstore.dto.BookSearchParametersDto;
-import yevhen.bookstore.dto.CreateBookRequestDto;
+import yevhen.bookstore.dto.book.BookDto;
+import yevhen.bookstore.dto.book.BookDtoWithoutCategoryIds;
+import yevhen.bookstore.dto.book.BookSearchParametersDto;
+import yevhen.bookstore.dto.book.CreateBookRequestDto;
 import yevhen.bookstore.exception.EntityNotFoundException;
 import yevhen.bookstore.mapper.BookMapper;
 import yevhen.bookstore.model.Book;
 import yevhen.bookstore.repository.BookRepository;
 import yevhen.bookstore.repository.specification.BookSpecificationBuilder;
-import yevhen.bookstore.service.BookService;
 
 @RequiredArgsConstructor
 @Service
@@ -64,6 +64,13 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll(specification)
                 .stream()
                 .map(bookMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<BookDtoWithoutCategoryIds> getBooksByCategory(Pageable pageable, Long id) {
+        return bookRepository.findAllByCategoriesId(id).stream()
+                .map(bookMapper::toDtoWithoutCategories)
                 .toList();
     }
 }

@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import yevhen.bookstore.dto.BookDto;
-import yevhen.bookstore.dto.BookSearchParametersDto;
-import yevhen.bookstore.dto.CreateBookRequestDto;
-import yevhen.bookstore.service.BookService;
+import yevhen.bookstore.dto.book.BookDto;
+import yevhen.bookstore.dto.book.BookSearchParametersDto;
+import yevhen.bookstore.dto.book.CreateBookRequestDto;
+import yevhen.bookstore.service.book.BookService;
 
 @Tag(name = "Online book store managing", description = "Endpoints for managing book store")
 @RequiredArgsConstructor

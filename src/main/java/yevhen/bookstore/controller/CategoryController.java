@@ -74,8 +74,8 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}/books")
-    @Operation(summary = "Get books by category",
-            description = "Retrieve books by a specific category")
+    @Operation(summary = "Get all books by category",
+            description = "Retrieve all books by a specific category")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public List<BookDtoWithoutCategoryIds> getBooksByCategory(Pageable pageable,
                                                               @PathVariable Long id) {

@@ -1,6 +1,7 @@
 package yevhen.bookstore.service;
 
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 import yevhen.bookstore.dto.BookDto;
 import yevhen.bookstore.dto.BookSearchParametersDto;
 import yevhen.bookstore.dto.CreateBookRequestDto;
@@ -8,7 +9,7 @@ import yevhen.bookstore.dto.CreateBookRequestDto;
 public interface BookService {
     BookDto save(CreateBookRequestDto requestDto);
 
-    List<BookDto> findAll();
+    List<BookDto> findAll(Pageable pageable);
 
     BookDto getBookById(Long id);
 

@@ -18,5 +18,5 @@ public record CreateBookRequestDto(
         BigDecimal price,
         String description,
         String coverImage,
-        List<Long> categories) {
+        List<Long> categoryIds) {
 }

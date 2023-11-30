@@ -35,7 +35,7 @@ public class CategoryController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new book category", description = "Create a new book category")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public CategoryDto createCategory(@RequestBody @Valid CreateCategoryRequestDto requestDto) {
         return categoryService.save(requestDto);
     }
@@ -43,14 +43,14 @@ public class CategoryController {
     @GetMapping
     @Operation(summary = "Get all book categories",
             description = "Get a list of all available book categories")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     public List<CategoryDto> getAll(Pageable pageable) {
         return categoryService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get one book category by id", description = "Get one book category by id")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasAnyRole('USER')")
     public CategoryDto getCategoryById(@PathVariable Long id) {
         return categoryService.getCategoryById(id);
     }
@@ -58,7 +58,7 @@ public class CategoryController {
     @PutMapping("/{id}")
     @Operation(summary = "Update a book category by id",
             description = "Update a book category with certain id")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public CategoryDto updateCategoryById(@RequestBody @Valid CreateCategoryRequestDto requestDto,
                                   @PathVariable Long id) {
         return categoryService.updateCategoryById(requestDto, id);
@@ -68,15 +68,15 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete one book category by id",
             description = "Delete one book category by id")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteCategoryById(Authentication authentication, @PathVariable Long id) {
         categoryService.deleteCategoryById(id);
     }
 
     @GetMapping("/{id}/books")
-    @Operation(summary = "Get books by category",
-            description = "Retrieve books by a specific category")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @Operation(summary = "Get all books by category",
+            description = "Retrieve all books by a specific category")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public List<BookDtoWithoutCategoryIds> getBooksByCategory(Pageable pageable,
                                                               @PathVariable Long id) {
         return bookService.getBooksByCategory(pageable, id);

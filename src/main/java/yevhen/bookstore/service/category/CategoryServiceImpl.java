@@ -38,16 +38,19 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto updateCategoryById(CreateCategoryRequestDto requestDto, Long id) {
-        Category categoryFromDB = categoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Can't get category by id:" + id));
+        Category categoryFromDB = checkExistingCategoryById(id);
         categoryMapper.updateCategory(requestDto, categoryFromDB);
         return categoryMapper.toDto(categoryRepository.save(categoryFromDB));
     }
 
     @Override
     public void deleteCategoryById(Long id) {
-        categoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Can't get category by id:" + id));
+        checkExistingCategoryById(id);
         categoryRepository.deleteById(id);
+    }
+
+    private Category checkExistingCategoryById(Long id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Can't get category by id:" + id));
     }
 }

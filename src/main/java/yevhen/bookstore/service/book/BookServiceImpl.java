@@ -16,6 +16,7 @@ import yevhen.bookstore.mapper.BookMapper;
 import yevhen.bookstore.model.Book;
 import yevhen.bookstore.model.Category;
 import yevhen.bookstore.repository.BookRepository;
+import yevhen.bookstore.repository.CategoryRepository;
 import yevhen.bookstore.repository.specification.BookSpecificationBuilder;
 
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final BookSpecificationBuilder bookSpecificationBuilder;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public BookDto save(CreateBookRequestDto requestDto) {

@@ -9,14 +9,12 @@ databaseChangeLog:
               - column:
                   name: id
                   type: bigint
-                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: user_id
-                  type: bigint
+                  name: is_deleted
+                  type: boolean
+                  defaultValueBoolean: false
                   constraints:
-                    nullable: false
-                    foreignKeyName: frgnKey_user_id
-                    references: users(id)
+                   nullable: false

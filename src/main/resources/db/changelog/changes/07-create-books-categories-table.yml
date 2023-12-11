@@ -10,11 +10,11 @@ databaseChangeLog:
                   name: book_id
                   type: bigint
                   constraints:
-                    foreignKeyName: foreignKey_book_id
+                    foreignKeyName: foreignKey_book-category_id
                     references: books(id)
               - column:
                   name: category_id
                   type: bigint
                   constraints:
-                    foreignKeyName: foreignKey_category_id
+                    foreignKeyName: foreignKey_category-book_id
                     references: categories(id)

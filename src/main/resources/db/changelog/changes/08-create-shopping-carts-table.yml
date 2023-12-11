@@ -13,10 +13,3 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
-              - column:
-                  name: user_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-                    foreignKeyName: frgnKey_user_id
-                    references: users(id)

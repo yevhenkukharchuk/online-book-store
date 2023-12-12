@@ -1,6 +1,5 @@
 package yevhen.bookstore.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -57,7 +56,7 @@ public class Book {
     @ToString.Exclude
     private Set<Category> categories = new HashSet<>();
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "book")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<CartItem> cartItems = new HashSet<>();

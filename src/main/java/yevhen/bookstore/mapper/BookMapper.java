@@ -31,7 +31,7 @@ public interface BookMapper {
 
     BookDtoWithoutCategoryIds toDtoWithoutCategories(Book book);
 
-    Book toBook(CreateBookRequestDto requestDto);
+    Book toModel(CreateBookRequestDto requestDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateBook(CreateBookRequestDto requestDto, @MappingTarget Book book);

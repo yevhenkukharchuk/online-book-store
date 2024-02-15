@@ -7,16 +7,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import yevhen.bookstore.dto.book.BookDto;
 import yevhen.bookstore.dto.book.BookDtoWithoutCategoryIds;
 import yevhen.bookstore.dto.book.BookSearchParametersDto;
 import yevhen.bookstore.dto.book.CreateBookRequestDto;
+import yevhen.bookstore.exception.DataProcessingException;
 import yevhen.bookstore.exception.EntityNotFoundException;
 import yevhen.bookstore.mapper.BookMapper;
 import yevhen.bookstore.model.Book;
 import yevhen.bookstore.model.Category;
 import yevhen.bookstore.repository.BookRepository;
-import yevhen.bookstore.repository.CategoryRepository;
+import yevhen.bookstore.repository.CartItemRepository;
 import yevhen.bookstore.repository.specification.BookSpecificationBuilder;
 
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final BookSpecificationBuilder bookSpecificationBuilder;
-    private final CategoryRepository categoryRepository;
+    private final CartItemRepository cartItemRepository;
 
     @Override
     public BookDto save(CreateBookRequestDto requestDto) {
@@ -60,11 +62,18 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteBookById(Long id) {
+        if (cartItemRepository.findAllByBookId(id).stream()
+                        .findAny()
+                        .isPresent()) {
+            throw new DataProcessingException("Removal is forbidden."
+                    + "This book is in some shopping cart");
+        }
         bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Can't find book by id:" + id));
         bookRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public List<BookDto> search(Pageable pageable, BookSearchParametersDto searchParameters) {
         Specification<Book> specification = bookSpecificationBuilder.build(searchParameters);

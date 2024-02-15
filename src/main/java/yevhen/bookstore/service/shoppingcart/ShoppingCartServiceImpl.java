@@ -32,7 +32,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Transactional
     @Override
     public ShoppingCartDto getShoppingCart() {
-        return shoppingCartMapper.toDto(getCurrentCurt());
+        return shoppingCartMapper.toDto(getCurrentCart());
     }
 
     @Transactional
@@ -42,14 +42,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         cartItem.setBook(bookRepository.findById(requestDto.bookId()).orElseThrow(()
                 -> new EntityNotFoundException("Can't get book by id:" + requestDto.bookId())));
         cartItem.setQuantity(requestDto.quantity());
-        cartItem.setShoppingCart(getCurrentCurt());
+        cartItem.setShoppingCart(getCurrentCart());
         return cartItemMapper.toDto(cartItemRepository.save(cartItem));
     }
 
     @Transactional
     @Override
     public CartItemDto updateCartItemById(UpdateCartItemRequestDto requestDto, Long id) {
-        ShoppingCart currentCart = getCurrentCurt();
+        ShoppingCart currentCart = getCurrentCart();
         CartItem cartItemFromDB = cartItemRepository.findByIdAndShoppingCartId(id,
                         currentCart.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Can't get cart item by id:" + id));
@@ -59,13 +59,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void deleteCartItemById(Long id) {
-        ShoppingCart currentCart = getCurrentCurt();
+        ShoppingCart currentCart = getCurrentCart();
         cartItemRepository.findByIdAndShoppingCartId(id, currentCart.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Can't get cart item by id:" + id));
         cartItemRepository.deleteById(id);
     }
 
-    private ShoppingCart getCurrentCurt() {
+    private ShoppingCart getCurrentCart() {
         User currentUser = userRepository.findUserByEmail(SecurityContextHolder.getContext()
                         .getAuthentication()
                         .getName())

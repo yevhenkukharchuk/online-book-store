@@ -1,4 +1,4 @@
-package yevhen.bookstore.dto;
+package yevhen.bookstore.dto.user;
 
 public record UserResponseDto(
         Long id,

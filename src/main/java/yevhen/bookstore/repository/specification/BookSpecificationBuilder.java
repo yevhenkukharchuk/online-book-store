@@ -3,7 +3,7 @@ package yevhen.bookstore.repository.specification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import yevhen.bookstore.dto.BookSearchParametersDto;
+import yevhen.bookstore.dto.book.BookSearchParametersDto;
 import yevhen.bookstore.model.Book;
 
 @RequiredArgsConstructor

@@ -1,7 +1,7 @@
-package yevhen.bookstore.service;
+package yevhen.bookstore.service.user;
 
-import yevhen.bookstore.dto.UserRegistrationRequestDto;
-import yevhen.bookstore.dto.UserResponseDto;
+import yevhen.bookstore.dto.user.UserRegistrationRequestDto;
+import yevhen.bookstore.dto.user.UserResponseDto;
 import yevhen.bookstore.exception.RegistrationException;
 
 public interface UserService {

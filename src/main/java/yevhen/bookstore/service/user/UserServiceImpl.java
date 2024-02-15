@@ -1,18 +1,17 @@
-package yevhen.bookstore.service.impl;
+package yevhen.bookstore.service.user;
 
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import yevhen.bookstore.dto.UserRegistrationRequestDto;
-import yevhen.bookstore.dto.UserResponseDto;
+import yevhen.bookstore.dto.user.UserRegistrationRequestDto;
+import yevhen.bookstore.dto.user.UserResponseDto;
 import yevhen.bookstore.exception.RegistrationException;
 import yevhen.bookstore.mapper.UserMapper;
 import yevhen.bookstore.model.Role;
 import yevhen.bookstore.model.User;
 import yevhen.bookstore.repository.RoleRepository;
 import yevhen.bookstore.repository.UserRepository;
-import yevhen.bookstore.service.UserService;
 
 @RequiredArgsConstructor
 @Service
